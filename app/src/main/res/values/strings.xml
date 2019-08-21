@@ -6,4 +6,5 @@
     <string name="string_start">Start</string>
     <string name="string_next">Next</string>
     <string name="string_title">Would You Rather</string>
+    <string name="string_pick_your_poison">Pick Your Poison:</string>
 </resources>

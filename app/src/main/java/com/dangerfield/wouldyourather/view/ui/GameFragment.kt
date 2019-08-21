@@ -1,4 +1,4 @@
-package com.dangerfield.wouldyourather.game
+package com.dangerfield.wouldyourather.view.ui
 
 
 import android.os.Bundle
