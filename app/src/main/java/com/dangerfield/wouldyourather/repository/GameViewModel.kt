@@ -16,6 +16,8 @@ class GameViewModel : ViewModel() {
      * these pack names will be used to decide which ranges to pull from
      */
     var packs = listOf<String>()
-
+    fun getNextQuestion() {
+        //do something
+    }
 
 }

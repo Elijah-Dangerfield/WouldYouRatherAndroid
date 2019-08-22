@@ -6,6 +6,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!--makes it so a user cant select 2 options at the same time -->
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
 
@@ -31,7 +34,5 @@
         <item name="android:textAllCaps">false</item>
 
     </style>
-
-
-
+    
 </resources>

@@ -37,7 +37,7 @@ class StartFragment : Fragment() {
         root.run {
             options = listOf(btn_option1,btn_option2,btn_option3)
 
-            options.forEach { view -> (view as Button).setOnClickListener { it.toggleBackground()}}
+            options.forEach { view -> view.setOnClickListener { it.toggleBackground()}}
 
             btn_start.setOnClickListener { prepareNavigation()}
         }
