@@ -1,9 +1,7 @@
-package com.dangerfield.wouldyourather.repository
+package com.dangerfield.wouldyourather.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dangerfield.wouldyourather.Custom.log
 import com.dangerfield.wouldyourather.model.Question
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -18,10 +16,29 @@ class GameViewModel : ViewModel() {
     private val db = FirebaseFirestore.getInstance()
 
 
-    fun getQuestion(): LiveData<Question>{
-        return currentQuestion
+    /**
+     * exposes live data to be observed
+     */
+    fun getQuestion() = currentQuestion
+
+    fun resetGame() {
+        packs = listOf()
+        pool = Stack()
     }
 
+    fun startGame() = getQuestionIDs {
+            loadNextQuestion()
+        }
+
+    fun submitVote(option: String) {
+        val questionID = currentQuestion.value?.id ?: return
+        db.collection("Packs").document(questionID).update(option,FieldValue.increment(1))
+    }
+
+    /**
+     * gets next question with ID in pool from firebase
+     * then updates livedata
+     */
     fun loadNextQuestion(whenEmpty: (()-> Unit) = {}) {
         if(pool.isEmpty()){
             whenEmpty.invoke()
@@ -34,13 +51,11 @@ class GameViewModel : ViewModel() {
                     questionDoc["2"] as Double,
                     questionDoc["questions"] as ArrayList<String>)
                 currentQuestion.value = question
-
             }else{
-                ("ERROR: COULD GRAB QUESTION W/ ID: "+ questionID).log()
+                //TODO send something to crashlytics
             }
         }
     }
-
 
     /**
      * gets the id for all questions in selected packs and stores in array
@@ -61,20 +76,4 @@ class GameViewModel : ViewModel() {
         }
     }
 
-    fun resetGame() {
-        packs = listOf()
-        pool = Stack()
-    }
-
-    fun startGame() {
-        getQuestionIDs {
-            loadNextQuestion()
-        }
-    }
-
-
-    fun submitVote(option: String) {
-        val questionID = currentQuestion.value?.id ?: return
-        db.collection("Packs").document(questionID).update(option,FieldValue.increment(1))
-    }
 }

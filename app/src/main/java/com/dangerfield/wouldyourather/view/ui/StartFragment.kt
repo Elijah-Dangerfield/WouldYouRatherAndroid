@@ -10,9 +10,9 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import com.dangerfield.wouldyourather.Custom.toggleBackground
+import com.dangerfield.wouldyourather.custom.toggleBackground
 import com.dangerfield.wouldyourather.R
-import com.dangerfield.wouldyourather.repository.GameViewModel
+import com.dangerfield.wouldyourather.viewmodel.GameViewModel
 import kotlinx.android.synthetic.main.fragment_start.*
 import kotlinx.android.synthetic.main.fragment_start.view.*
 import kotlinx.android.synthetic.main.fragment_start.view.btn_start

@@ -1,14 +1,9 @@
-package com.dangerfield.wouldyourather.Custom
+package com.dangerfield.wouldyourather.custom
 
-import android.app.Dialog
-import android.content.Context
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import com.dangerfield.wouldyourather.R
-import kotlinx.android.synthetic.main.alert_custom.view.*
-
 
 fun View.toggleBackground() {
      when(this.tag) {
