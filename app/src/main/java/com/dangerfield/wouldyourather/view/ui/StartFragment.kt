@@ -13,7 +13,9 @@ import androidx.navigation.fragment.findNavController
 import com.dangerfield.wouldyourather.Custom.toggleBackground
 import com.dangerfield.wouldyourather.R
 import com.dangerfield.wouldyourather.repository.GameViewModel
+import kotlinx.android.synthetic.main.fragment_start.*
 import kotlinx.android.synthetic.main.fragment_start.view.*
+import kotlinx.android.synthetic.main.fragment_start.view.btn_start
 
 class StartFragment : Fragment() {
 
@@ -44,7 +46,9 @@ class StartFragment : Fragment() {
 
             options.forEach { view -> view.setOnClickListener { it.toggleBackground()}}
 
-            btn_start.setOnClickListener { prepareNavigation()}
+            btn_start.setOnClickListener {
+                it.isClickable = false // to avoid sending multiple requests
+                prepareNavigation()}
         }
     }
 
@@ -53,11 +57,13 @@ class StartFragment : Fragment() {
 
         if (viewModel.packs.isEmpty()) {
             Toast.makeText(context, "Please Select a Pack", Toast.LENGTH_LONG).show()
+            btn_start.isClickable = true
             return
         }
 
-        viewModel.getRanges {
-            findNavController().navigate(R.id.action_startFragment_to_gameFragment)
-        }
+        viewModel.startGame()
+
+        findNavController().navigate(R.id.action_startFragment_to_gameFragment)
+        btn_start.isClickable = true
     }
 }

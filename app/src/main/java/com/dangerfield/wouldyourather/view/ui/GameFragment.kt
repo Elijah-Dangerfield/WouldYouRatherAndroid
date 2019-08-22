@@ -26,6 +26,8 @@ import kotlinx.android.synthetic.main.fragment_game.view.btn_option2
 class GameFragment : Fragment() {
     private lateinit var viewModel: GameViewModel
     lateinit var options: List<Button>
+    var pct1 = 0
+    var pct2 = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,12 +45,11 @@ class GameFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(activity!!).get(GameViewModel::class.java)
 
-        viewModel.getRanges { viewModel.pool.toString().log() }
+        viewModel.getQuestionIDs { viewModel.pool.toString().log() }
 
         viewModel.getQuestion().observe(viewLifecycleOwner, Observer {
             updateOptions(it)
         })
-
 
     }
 
@@ -57,10 +58,8 @@ class GameFragment : Fragment() {
         btn_option1.text = question.questions[0]
         btn_option2.text = question.questions[1]
         val total = question.option1Votes + question.option2Votes
-        val pct1 = (question.option1Votes / total * 100).toInt()
-        val pct2 = (question.option2Votes / total * 100).toInt()
-        tv_pct_1.text = "$pct1%"
-        tv_pct_2.text = "$pct2%"
+        pct1 = (question.option1Votes / total * 100).toInt()
+        pct2 = (question.option2Votes / total * 100).toInt()
     }
 
     private fun initializeViews(root: View) {
@@ -74,13 +73,22 @@ class GameFragment : Fragment() {
     }
 
     private fun vote(option: Button){
-        if(options.elementAt(options.size - options.indexOf(option) - 1).tag != 1){
-            option.select()
-            viewModel.submitVote {
-                tv_pct_1.visibility = View.VISIBLE
-                tv_pct_2.visibility = View.VISIBLE
-            }
-        }
+        val index = options.indexOf(option)
+        //if the other guy has already been voted for, we cant vote again
+        if(options.elementAt(options.size - index - 1).tag == 1) return
+
+        option.select()
+        viewModel.submitVote((index + 1 ).toString())
+
+        if(index == 0) pct1 += 1
+        else pct2 +=1
+
+        tv_pct_1.text = "$pct1%"
+        tv_pct_2.text = "$pct2%"
+
+
+        tv_pct_1.visibility = View.VISIBLE
+        tv_pct_2.visibility = View.VISIBLE
     }
 
     private fun loadNextQuestion() {

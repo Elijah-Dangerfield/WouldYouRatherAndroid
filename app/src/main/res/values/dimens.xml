@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="actionButtonHeight">50dp</dimen>
+    <dimen name="actionButtonHeight">60dp</dimen>
     <dimen name="optionButtonHeight">100dp</dimen>
     <dimen name="optionButtonRadius">10dp</dimen>
 

@@ -45,7 +45,7 @@
         <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/btn_option1" style="@style/OptionButton"
-                android:layout_weight="1" android:layout_margin="8dp" android:text="OPTION"/>
+                android:layout_weight="1" android:layout_margin="8dp"/>
         <TextView
                 android:text="OR"
                 android:layout_width="match_parent"
@@ -60,7 +60,7 @@
         <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/btn_option2" style="@style/OptionButton"
-                android:layout_weight="1" android:layout_margin="8dp" android:text="OPTION"/>
+                android:layout_weight="1" android:layout_margin="8dp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
