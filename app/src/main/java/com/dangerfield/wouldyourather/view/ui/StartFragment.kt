@@ -50,6 +50,9 @@ class StartFragment : Fragment() {
             Toast.makeText(context, "Please Select a Pack", Toast.LENGTH_LONG).show()
             return
         }
-        findNavController().navigate(R.id.action_startFragment_to_gameFragment)
+
+        viewModel.getRanges {
+            findNavController().navigate(R.id.action_startFragment_to_gameFragment)
+        }
     }
 }

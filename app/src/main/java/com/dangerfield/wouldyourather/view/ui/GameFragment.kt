@@ -7,20 +7,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.dangerfield.wouldyourather.Custom.AlertFactory
 import com.dangerfield.wouldyourather.Custom.log
 import com.dangerfield.wouldyourather.Custom.select
 import com.dangerfield.wouldyourather.Custom.unselect
 import com.dangerfield.wouldyourather.R
+import com.dangerfield.wouldyourather.model.Question
 import com.dangerfield.wouldyourather.repository.GameViewModel
+import kotlinx.android.synthetic.main.fragment_game.*
 import kotlinx.android.synthetic.main.fragment_game.view.*
+import kotlinx.android.synthetic.main.fragment_game.view.btn_option1
 import kotlinx.android.synthetic.main.fragment_game.view.btn_option2
 
 
 class GameFragment : Fragment() {
-    private val TAG = "!!!GAME FRAGMENT!!!"
     private lateinit var viewModel: GameViewModel
     lateinit var options: List<Button>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,11 +42,18 @@ class GameFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(activity!!).get(GameViewModel::class.java)
 
-        viewModel.getRanges {
-            viewModel.pool.toString().log()
-        }
-        //TODO: observe current question when updated , set views off screen, text text, animate slide in
+        viewModel.getRanges { viewModel.pool.toString().log() }
 
+        viewModel.getQuestion().observe(viewLifecycleOwner, Observer {
+            updateOptions(it)
+        })
+
+
+    }
+
+    private fun updateOptions(question: Question) {
+        btn_option1.text = question.questions[0]
+        btn_option2.text = question.questions[1]
     }
 
     private fun initializeViews(root: View) {
@@ -64,6 +76,11 @@ class GameFragment : Fragment() {
             it.text = ""
             it.unselect()
         }
-        viewModel.getNextQuestion()
+        viewModel.loadNextQuestion(whenEmpty = {
+            context?.let {
+                AlertFactory.simpleAlert(it,"No More Questions","There are no more questions for the selected" +
+                        "packs :(. More will be coming soon!","Okay",{},"",{}).show()
+            }
+        })
     }
 }

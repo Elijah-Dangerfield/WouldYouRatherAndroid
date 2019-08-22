@@ -4,7 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dangerfield.wouldyourather.Custom.log
+import com.dangerfield.wouldyourather.model.Question
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
+import kotlin.collections.ArrayList
 
 class GameViewModel : ViewModel() {
     /*
@@ -20,16 +23,34 @@ class GameViewModel : ViewModel() {
      * these pack names will be used to decide which ranges to pull from
      */
     var packs = listOf<String>()
-    var pool = ArrayList<String>()
+    var pool = Stack<String>()
+    private val currentQuestion: MutableLiveData<Question> = MutableLiveData()
     private val db = FirebaseFirestore.getInstance()
-    val currentQuestion: LiveData<ArrayList<String>> = MutableLiveData()
 
 
-    fun getNextQuestion() {
-        //update livedata current Question
+    fun getQuestion(): LiveData<Question>{
+        return currentQuestion
+    }
+
+    fun loadNextQuestion(whenEmpty: (()-> Unit)) {
+        if(pool.isEmpty()){
+            whenEmpty.invoke()
+            return
+        }
+        val questionID = pool.pop()
+        db.collection("Test").document(questionID).get().addOnSuccessListener {questionDoc->
+            if(questionDoc!= null && questionDoc.exists()){
+                currentQuestion.value = questionDoc.toObject(Question::class.java)
+            }else{
+                ("ERROR: COULD GRAB QUESTION W/ ID: "+ questionID).log()
+            }
+        }
     }
 
 
+    /**
+     * gets the id for all questions in selected packs and stores in array
+     */
     fun getRanges(completion: (()-> Unit)) {
         var completed = 0
         packs.forEach {pack ->
@@ -38,11 +59,11 @@ class GameViewModel : ViewModel() {
                 range.toString().log()
                 for(i in range[0]..range[1]) pool.add(i.toString())
                 completed+=1
-                if(completed ==packs.size) completion.invoke()
+                if(completed ==packs.size) {
+                    pool.shuffle()
+                    completion.invoke()
+                }
             }
         }
-
-
     }
-
 }
