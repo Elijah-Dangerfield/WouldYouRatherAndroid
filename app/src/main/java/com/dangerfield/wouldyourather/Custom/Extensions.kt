@@ -1,7 +1,9 @@
 package com.dangerfield.wouldyourather.Custom
 
+import android.content.Context
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import com.dangerfield.wouldyourather.R
 
@@ -28,4 +30,10 @@ fun View.toggleBackground() {
 
 fun String.log() {
     Log.d("DEBUG:",this)
+}
+
+fun View.initWith(func: ()->Unit){
+    this.run {
+        func.invoke()
+    }
 }

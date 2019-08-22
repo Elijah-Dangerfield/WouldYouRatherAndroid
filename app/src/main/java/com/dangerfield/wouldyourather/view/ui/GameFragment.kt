@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.dangerfield.wouldyourather.Custom.initWith
 import com.dangerfield.wouldyourather.Custom.log
 import com.dangerfield.wouldyourather.R
 
@@ -19,7 +20,9 @@ class GameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_game, container, false)
+        val root = inflater.inflate(R.layout.fragment_game, container, false)
+        initializeViews(root)
+        return root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -28,10 +31,11 @@ class GameFragment : Fragment() {
         val packs = arguments?.run{
             this.getStringArrayList(resources.getString(R.string.packs_key))
         }
-
         packs.toString().log()
+    }
 
-
+    private fun initializeViews(root: View) {
+        "INIT GAME VIEWS".log()
     }
 
 }
