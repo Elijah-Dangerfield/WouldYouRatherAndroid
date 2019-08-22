@@ -31,14 +31,15 @@ class GameFragment : Fragment() {
         return root
     }
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val packs = arguments?.run{
-            this.getStringArrayList(resources.getString(R.string.packs_key))
-        }
         viewModel = ViewModelProviders.of(activity!!).get(GameViewModel::class.java)
 
+        viewModel.getRanges {
+            viewModel.pool.toString().log()
+        }
         //TODO: observe current question when updated , set views off screen, text text, animate slide in
 
     }
@@ -54,7 +55,6 @@ class GameFragment : Fragment() {
                         it.select()
                 }
             }
-
             btn_next.setOnClickListener { loadNextQuestion() }
         }
     }
