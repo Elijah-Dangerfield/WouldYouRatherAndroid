@@ -1,5 +1,6 @@
 package com.dangerfield.wouldyourather.Custom
 
+import android.util.Log
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.dangerfield.wouldyourather.R
@@ -23,4 +24,8 @@ fun View.toggleBackground() {
             ResourcesCompat.getDrawable(resources, R.drawable.option_button_selected_drawable,null)
         }
     }
+}
+
+fun String.log() {
+    Log.d("DEBUG:",this)
 }

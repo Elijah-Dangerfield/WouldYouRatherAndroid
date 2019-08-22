@@ -2,7 +2,11 @@ package com.dangerfield.wouldyourather.repository
 
 class QuestionsRepository {
 
-    fun getNextQuestion(){
+    fun getNextQuestion() {
         //update live data
+    }
+
+    fun getQuestionRanges() {
+
     }
 }

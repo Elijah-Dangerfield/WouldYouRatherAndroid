@@ -1,10 +1,11 @@
 <resources>
+
     <string name="app_name">Would You Rather</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="string_start">Start</string>
     <string name="string_next">Next</string>
     <string name="string_title">Would You Rather</string>
     <string name="string_pick_your_poison">Pick Your Poison:</string>
+    <string name="packs_key">kew4jgh:</string>
+
 </resources>
