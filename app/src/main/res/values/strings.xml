@@ -1,5 +1,4 @@
 <resources>
-
     <string name="app_name">Would You Rather</string>
 
     <string name="string_start">Start</string>
@@ -10,5 +9,11 @@
     <string name="string_the_warm_up">The Warm Up</string>
     <string name="string_question_your_morals">Question Your Morals</string>
     <string name="r_rated">R-Rated</string>
+    <string name="string_questions_alert_title">No More Questions</string>
+    <string name="string_questions_alert_message">There are no more questions for the selected packs :( BUT more will be coming soon!</string>
+    <string name="string_okay">Okay</string>
+    <string name="string_select_pack">Please Select a Pack</string>
+    <string name="string_or">OR</string>
+
 
 </resources>

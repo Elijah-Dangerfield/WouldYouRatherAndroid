@@ -1,7 +1,5 @@
-package com.dangerfield.wouldyourather.view.ui
+package com.dangerfield.wouldyourather.view
 
-
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,11 +8,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.dangerfield.wouldyourather.R
 import com.dangerfield.wouldyourather.custom.AlertFactory
 import com.dangerfield.wouldyourather.custom.log
 import com.dangerfield.wouldyourather.custom.select
 import com.dangerfield.wouldyourather.custom.unselect
-import com.dangerfield.wouldyourather.R
 import com.dangerfield.wouldyourather.model.Question
 import com.dangerfield.wouldyourather.viewmodel.GameViewModel
 import kotlinx.android.synthetic.main.fragment_game.*
@@ -22,18 +20,14 @@ import kotlinx.android.synthetic.main.fragment_game.view.*
 import kotlinx.android.synthetic.main.fragment_game.view.btn_option1
 import kotlinx.android.synthetic.main.fragment_game.view.btn_option2
 
-
 class GameFragment : Fragment() {
     private lateinit var viewModel: GameViewModel
     lateinit var options: List<Button>
     var pct1 = 0
     var pct2 = 0
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.fragment_game, container, false)
         initializeViews(root)
         return root
@@ -50,10 +44,8 @@ class GameFragment : Fragment() {
         viewModel.getQuestion().observe(viewLifecycleOwner, Observer {
             updateOptions(it)
         })
-
     }
 
-    @SuppressLint("SetTextI18n")
     private fun updateOptions(question: Question) {
         btn_option1.text = question.questions[0]
         btn_option2.text = question.questions[1]
@@ -86,16 +78,12 @@ class GameFragment : Fragment() {
         tv_pct_1.text = "$pct1%"
         tv_pct_2.text = "$pct2%"
 
-
         tv_pct_1.visibility = View.VISIBLE
         tv_pct_2.visibility = View.VISIBLE
     }
 
     private fun loadNextQuestion() {
-        options.forEach {
-            it.text = ""
-            it.unselect()
-        }
+        options.forEach { it.text = ""; it.unselect() }
         tv_pct_1.visibility = View.INVISIBLE
         tv_pct_2.visibility = View.INVISIBLE
         viewModel.loadNextQuestion(whenEmpty = {showEmptyAlert()})
@@ -103,8 +91,10 @@ class GameFragment : Fragment() {
 
     private fun showEmptyAlert(){
         context?.let {
-            AlertFactory.simpleAlert(it,"No More Questions","There are no more questions for the selected" +
-                    "packs :(. More will be coming soon!","Okay").show()
+            AlertFactory.simpleAlert(it,
+                resources.getString(R.string.string_questions_alert_title),
+                resources.getString(R.string.string_questions_alert_message),
+                resources.getString(R.string.string_okay)).show()
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.ui.StartFragment" android:id="@+id/game_layout_parent"
+        tools:context=".view.StartFragment" android:id="@+id/game_layout_parent"
         android:background="@color/colorPrimary">
 
     <TextView
@@ -37,7 +37,6 @@
             android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/btn_next"
             android:id="@+id/linearLayout">
         <TextView
-                android:text="69%"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/tv_pct_1" android:layout_weight="0"
                 android:gravity="end" android:textSize="18sp" android:textColor="@android:color/white"
@@ -47,12 +46,11 @@
                 android:layout_height="wrap_content" android:id="@+id/btn_option1" style="@style/OptionButton"
                 android:layout_weight="1" android:layout_margin="8dp"/>
         <TextView
-                android:text="OR"
+                android:text="@string/string_or"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/textView"
                 android:textColor="@android:color/white" android:textSize="24sp" android:gravity="center_horizontal"/>
         <TextView
-                android:text="69%"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/tv_pct_2" android:layout_weight="0"
                 android:gravity="start" android:textSize="18sp" android:textColor="@android:color/white"
