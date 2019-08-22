@@ -10,18 +10,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class GameViewModel : ViewModel() {
-    /*
-    Sep. of concerns
-    This file ONLY:
-    exposes live data obtained from repository
-    holds lifecycle spanning state
 
-    Rules: if youre not observing it, dont make it live data
-     */
-
-    /**
-     * these pack names will be used to decide which ranges to pull from
-     */
     var packs = listOf<String>()
     var pool = Stack<String>()
     private val currentQuestion: MutableLiveData<Question> = MutableLiveData()
@@ -65,5 +54,9 @@ class GameViewModel : ViewModel() {
                 }
             }
         }
+    }
+
+    fun submitVote(completion: () -> Unit) {
+        completion.invoke()
     }
 }

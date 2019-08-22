@@ -1,11 +1,13 @@
 package com.dangerfield.wouldyourather.Custom
 
+import android.app.Dialog
 import android.content.Context
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import com.dangerfield.wouldyourather.R
+import kotlinx.android.synthetic.main.alert_custom.view.*
 
 
 fun View.toggleBackground() {
@@ -28,4 +30,3 @@ fun View.unselect() {
 fun String.log() {
     Log.d("DEBUG:",this)
 }
-

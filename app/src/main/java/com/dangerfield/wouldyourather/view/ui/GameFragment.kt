@@ -54,20 +54,27 @@ class GameFragment : Fragment() {
     private fun updateOptions(question: Question) {
         btn_option1.text = question.questions[0]
         btn_option2.text = question.questions[1]
+        tv_pct_1.text = question.option1Votes.toString()
+        tv_pct_2.text = question.option2Votes.toString()
     }
 
     private fun initializeViews(root: View) {
-        "INIT GAME VIEWS".log()
         root.run{
             options = listOf(btn_option1,btn_option2)
-            //if the other option hasnt been clicked, select this boy
-            options.forEach { btn ->
-                btn.setOnClickListener {
-                    if(options.elementAt(options.size - options.indexOf(it) - 1).tag != 1)
-                        it.select()
-                }
-            }
+
+            options.forEach { option -> option.setOnClickListener { vote(option) }}
+
             btn_next.setOnClickListener { loadNextQuestion() }
+        }
+    }
+
+    private fun vote(option: Button){
+        if(options.elementAt(options.size - options.indexOf(option) - 1).tag != 1){
+            option.select()
+            viewModel.submitVote {
+                tv_pct_1.visibility = View.VISIBLE
+                tv_pct_2.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -76,11 +83,15 @@ class GameFragment : Fragment() {
             it.text = ""
             it.unselect()
         }
-        viewModel.loadNextQuestion(whenEmpty = {
-            context?.let {
-                AlertFactory.simpleAlert(it,"No More Questions","There are no more questions for the selected" +
-                        "packs :(. More will be coming soon!","Okay",{},"",{}).show()
-            }
-        })
+        tv_pct_1.visibility = View.INVISIBLE
+        tv_pct_2.visibility = View.INVISIBLE
+        viewModel.loadNextQuestion(whenEmpty = {showEmptyAlert()})
+    }
+
+    private fun showEmptyAlert(){
+        context?.let {
+            AlertFactory.simpleAlert(it,"No More Questions","There are no more questions for the selected" +
+                    "packs :(. More will be coming soon!","Okay").show()
+        }
     }
 }

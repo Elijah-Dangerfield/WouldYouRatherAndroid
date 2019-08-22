@@ -14,8 +14,8 @@ import kotlinx.android.synthetic.main.alert_custom.view.*
 object AlertFactory {
 
     fun simpleAlert(
-        context: Context, title: String, message: String, positiveText: String, positiveAction: (() -> Unit),
-        negativeText: String, negativeAction: (() -> Unit)
+        context: Context, title: String, message: String, positiveText: String, positiveAction: (() -> Unit) = {},
+        negativeText: String = "", negativeAction: (()-> Unit) = {}
     ): Dialog {
 
         val dialogBuilder = AlertDialog.Builder(context)
@@ -32,6 +32,7 @@ object AlertFactory {
                 btn_negative.setOnClickListener { negativeAction.invoke(); dialog.cancel() }
                 btn_negative.text = negativeText
             }
+
             btn_positive.setOnClickListener { positiveAction.invoke(); dialog.dismiss() }
             btn_positive.text = positiveText
             tv_alert_message.text = message
