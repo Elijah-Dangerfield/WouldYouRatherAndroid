@@ -1,5 +1,7 @@
 package com.dangerfield.wouldyourather.repository
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class GameViewModel : ViewModel() {
@@ -16,8 +18,9 @@ class GameViewModel : ViewModel() {
      * these pack names will be used to decide which ranges to pull from
      */
     var packs = listOf<String>()
+    val currentQuestion: LiveData<ArrayList<String>> = MutableLiveData()
     fun getNextQuestion() {
-        //do something
+        //update livedata current Question
     }
 
 }
