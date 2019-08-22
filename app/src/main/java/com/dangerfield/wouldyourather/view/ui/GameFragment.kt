@@ -1,6 +1,7 @@
 package com.dangerfield.wouldyourather.view.ui
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -51,11 +52,15 @@ class GameFragment : Fragment() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun updateOptions(question: Question) {
         btn_option1.text = question.questions[0]
         btn_option2.text = question.questions[1]
-        tv_pct_1.text = question.option1Votes.toString()
-        tv_pct_2.text = question.option2Votes.toString()
+        val total = question.option1Votes + question.option2Votes
+        val pct1 = (question.option1Votes / total * 100).toInt()
+        val pct2 = (question.option2Votes / total * 100).toInt()
+        tv_pct_1.text = "$pct1%"
+        tv_pct_2.text = "$pct2%"
     }
 
     private fun initializeViews(root: View) {

@@ -29,7 +29,11 @@ class GameViewModel : ViewModel() {
         val questionID = pool.pop()
         db.collection("Test").document(questionID).get().addOnSuccessListener {questionDoc->
             if(questionDoc!= null && questionDoc.exists()){
-                currentQuestion.value = questionDoc.toObject(Question::class.java)
+                val question = Question(questionDoc["1"] as Double,
+                    questionDoc["2"] as Double,
+                    questionDoc["questions"] as ArrayList<String>)
+                currentQuestion.value = question
+
             }else{
                 ("ERROR: COULD GRAB QUESTION W/ ID: "+ questionID).log()
             }
@@ -55,6 +59,12 @@ class GameViewModel : ViewModel() {
             }
         }
     }
+
+    fun resetGame() {
+        packs = listOf()
+        pool = Stack()
+    }
+
 
     fun submitVote(completion: () -> Unit) {
         completion.invoke()

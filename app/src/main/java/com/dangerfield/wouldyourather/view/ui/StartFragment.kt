@@ -32,6 +32,11 @@ class StartFragment : Fragment() {
         viewModel = ViewModelProviders.of(activity!!).get(GameViewModel::class.java)
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.resetGame()
+    }
+
     fun initViews(root: View){
         viewModel.packs = listOf()
         root.run {
