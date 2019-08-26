@@ -21,3 +21,6 @@ This file is responible for fetching Questions from Firebase and exposing it as 
 
 ### model/Question.kt
 This class is reponsible for modeling the shape of the data pulled from Firebase
+
+### custom/*
+These files are used as helpers to make sure my code is clean :)
