@@ -19,12 +19,13 @@ import kotlinx.android.synthetic.main.fragment_game.*
 import kotlinx.android.synthetic.main.fragment_game.view.*
 import kotlinx.android.synthetic.main.fragment_game.view.btn_option1
 import kotlinx.android.synthetic.main.fragment_game.view.btn_option2
+import kotlinx.android.synthetic.main.question_info_1.*
+import kotlinx.android.synthetic.main.question_info_2.*
 
 class GameFragment : Fragment() {
     private lateinit var viewModel: GameViewModel
     lateinit var options: List<Button>
-    var pct1 = 0
-    var pct2 = 0
+    lateinit var currentQuestion: Question
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -39,19 +40,20 @@ class GameFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(activity!!).get(GameViewModel::class.java)
 
-        viewModel.getQuestionIDs { viewModel.pool.toString().log() }
+        viewModel.startGame()
 
         viewModel.getQuestion().observe(viewLifecycleOwner, Observer {
-            updateOptions(it)
+            currentQuestion = it
+            updateOptions(currentQuestion)
         })
     }
 
     private fun updateOptions(question: Question) {
         btn_option1.text = question.questions[0]
         btn_option2.text = question.questions[1]
-        val total = question.option1Votes + question.option2Votes
-        pct1 = (question.option1Votes / total * 100).toInt()
-        pct2 = (question.option2Votes / total * 100).toInt()
+        tv_vote_count_1.text = question.option1Votes.toInt().toString()
+        tv_vote_count_2.text = question.option2Votes.toInt().toString()
+
     }
 
     private fun initializeViews(root: View) {
@@ -72,20 +74,20 @@ class GameFragment : Fragment() {
         option.select()
         viewModel.submitVote((index + 1 ).toString())
 
-        if(index == 0) pct1 += 1
-        else pct2 +=1
+        if(index == 0) currentQuestion.pct_1 += 1
+        else currentQuestion.pct_2 +=1
 
-        tv_pct_1.text = "$pct1%"
-        tv_pct_2.text = "$pct2%"
+        pct_1.text = "${currentQuestion.pct_1}%"
+        pct_2.text = "${currentQuestion.pct_2}%"
 
-        tv_pct_1.visibility = View.VISIBLE
-        tv_pct_2.visibility = View.VISIBLE
+        vote_1.visibility = View.VISIBLE
+        vote_2.visibility = View.VISIBLE
     }
 
     private fun loadNextQuestion() {
         options.forEach { it.text = ""; it.unselect() }
-        tv_pct_1.visibility = View.INVISIBLE
-        tv_pct_2.visibility = View.INVISIBLE
+        vote_1.visibility = View.INVISIBLE
+        vote_2.visibility = View.INVISIBLE
         viewModel.loadNextQuestion(whenEmpty = {showEmptyAlert()})
     }
 

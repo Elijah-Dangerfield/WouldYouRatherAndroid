@@ -36,20 +36,26 @@
             android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/btn_next"
             android:id="@+id/linearLayout">
-        <TextView
+        <include
+                android:id="@+id/vote_1"
+                android:visibility="invisible"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/tv_pct_1" android:layout_weight="0"
-                android:gravity="end" android:textSize="18sp" android:textColor="@android:color/white"
-                android:visibility="invisible" android:layout_marginEnd="8dp"/>
+                android:layout_height="wrap_content"
+                layout="@layout/question_info_1"
+                android:layout_weight="0"/>
+
         <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/btn_option1" style="@style/OptionButton"
                 android:layout_weight="1" android:layout_margin="8dp"/>
-        <TextView
-                android:text="@string/string_or"
+
+        <include
+                android:id="@+id/vote_2"
+                android:visibility="invisible"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/textView"
-                android:textColor="@android:color/white" android:textSize="24sp" android:gravity="center_horizontal"/>
+                android:layout_height="wrap_content"
+                layout="@layout/question_info_2"
+                android:layout_weight="0"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/tv_pct_2" android:layout_weight="0"
