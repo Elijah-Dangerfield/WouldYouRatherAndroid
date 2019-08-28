@@ -50,7 +50,7 @@ class GameViewModel : ViewModel() {
                 val question = Question(questionID,questionDoc["1"] as Double,
                     questionDoc["2"] as Double,
                     questionDoc["questions"] as ArrayList<String>)
-                currentQuestion.value = question
+                currentQuestion.postValue(question)
             }else{
                 //TODO send something to crashlytics
             }
