@@ -1,5 +1,5 @@
 # WouldYouRatherAndroid
-This project is my first mobile application on the Google Play Store.
+This project is my first mobile application on the Google Play Store. You can find the bad boy right here: (super dope link you need to click)[https://play.google.com/store/apps/details?id=com.dangerfield.wouldyourather]
 
 ### TechStack
 ##### Kotlin
