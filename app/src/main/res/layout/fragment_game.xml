@@ -49,6 +49,17 @@
                 android:layout_height="wrap_content" android:id="@+id/btn_option1" style="@style/OptionButton"
                 android:layout_weight="1" android:layout_margin="8dp"/>
 
+        <TextView
+                android:id="@+id/tv_or"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:gravity="center_horizontal"
+                android:text="OR"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
         <include
                 android:id="@+id/vote_2"
                 android:visibility="invisible"
@@ -56,11 +67,7 @@
                 android:layout_height="wrap_content"
                 layout="@layout/question_info_2"
                 android:layout_weight="0"/>
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/tv_pct_2" android:layout_weight="0"
-                android:gravity="start" android:textSize="18sp" android:textColor="@android:color/white"
-                android:visibility="invisible" android:layout_marginStart="8dp"/>
+
         <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/btn_option2" style="@style/OptionButton"

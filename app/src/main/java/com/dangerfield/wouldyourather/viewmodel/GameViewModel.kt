@@ -11,7 +11,7 @@ import kotlin.collections.ArrayList
 class GameViewModel : ViewModel() {
 
     var packs = listOf<String>() // state variable
-    private var pool = Stack<String>()
+    var pool = Stack<String>()
     private val currentQuestion: MutableLiveData<Question> = MutableLiveData()
     private val db = FirebaseFirestore.getInstance()
 

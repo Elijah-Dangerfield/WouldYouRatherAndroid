@@ -1,5 +1,6 @@
 package com.dangerfield.wouldyourather.view
 
+import android.animation.ValueAnimator
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,10 +10,7 @@ import android.widget.Button
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.dangerfield.wouldyourather.R
-import com.dangerfield.wouldyourather.custom.AlertFactory
-import com.dangerfield.wouldyourather.custom.log
-import com.dangerfield.wouldyourather.custom.select
-import com.dangerfield.wouldyourather.custom.unselect
+import com.dangerfield.wouldyourather.custom.*
 import com.dangerfield.wouldyourather.model.Question
 import com.dangerfield.wouldyourather.viewmodel.GameViewModel
 import kotlinx.android.synthetic.main.fragment_game.*
@@ -44,6 +42,8 @@ class GameFragment : Fragment() {
             currentQuestion = it
             updateOptions(currentQuestion)
         })
+
+        tv_or.startRotation()
     }
 
     private fun updateOptions(question: Question) {
@@ -60,7 +60,9 @@ class GameFragment : Fragment() {
 
             options.forEach { option -> option.setOnClickListener { vote(option) }}
 
-            btn_next.setOnClickListener { loadNextQuestion() }
+            btn_next.setOnClickListener {
+                tv_or?.startRotation()
+                loadNextQuestion() }
         }
     }
 
