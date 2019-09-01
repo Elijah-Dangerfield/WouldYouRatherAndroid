@@ -40,8 +40,6 @@ class GameFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(activity!!).get(GameViewModel::class.java)
 
-        viewModel.startGame()
-
         viewModel.getQuestion().observe(viewLifecycleOwner, Observer {
             currentQuestion = it
             updateOptions(currentQuestion)
