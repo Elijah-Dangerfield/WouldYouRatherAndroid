@@ -11,7 +11,7 @@ import kotlin.collections.ArrayList
 class GameViewModel : ViewModel() {
 
     var packs = listOf<String>() // state variable
-    private var pool = Stack<String>()
+    var pool = Stack<String>()
     private val currentQuestion: MutableLiveData<Question> = MutableLiveData()
     private val db = FirebaseFirestore.getInstance()
 
@@ -50,7 +50,7 @@ class GameViewModel : ViewModel() {
                 val question = Question(questionID,questionDoc["1"] as Double,
                     questionDoc["2"] as Double,
                     questionDoc["questions"] as ArrayList<String>)
-                currentQuestion.value = question
+                currentQuestion.postValue(question)
             }else{
                 //TODO send something to crashlytics
             }
