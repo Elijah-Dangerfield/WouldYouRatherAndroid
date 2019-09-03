@@ -51,7 +51,7 @@ class GameFragment : Fragment() {
         btn_option2.text = question.questions[1]
         tv_vote_count_1.text = question.option1Votes.toInt().toString()
         tv_vote_count_2.text = question.option2Votes.toInt().toString()
-
+        options.forEach { it.isClickable = true}
     }
 
     private fun initializeViews(root: View) {
@@ -67,6 +67,7 @@ class GameFragment : Fragment() {
     }
 
     private fun vote(option: Button){
+        options.forEach { it.isClickable = false}
         val index = options.indexOf(option)
         //if the other guy has already been voted for, we cant vote again
         if(options.elementAt(options.size - index - 1).tag == 1) return
