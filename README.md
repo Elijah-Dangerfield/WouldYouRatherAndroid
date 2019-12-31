@@ -1,6 +1,8 @@
 # WouldYouRatherAndroid
 This project is my first mobile application on the Google Play Store. You can find the bad boy right here: [super dope link you need to click](https://play.google.com/store/apps/details?id=com.dangerfield.wouldyourather)
 
+![](https://firebasestorage.googleapis.com/v0/b/github-images.appspot.com/o/Screen%20Shot%202019-12-31%20at%2014.37.29.png?alt=media&token=4c6c3ad1-8d4e-4082-bd53-104b2a8cf313)
+
 ### TechStack
 ##### Kotlin
 ##### Firebase
